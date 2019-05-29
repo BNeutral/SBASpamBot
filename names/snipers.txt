@@ -1,0 +1,10 @@
+sniper_10
+sniper_lightning_10
+sniper_water_10
+sniper_fire_10
+sniper_poison_10
+sniper_ice_10
+sniper_reaper
+sniper_side_10
+sniper_hawkeye_10
+sniper_wasp_10

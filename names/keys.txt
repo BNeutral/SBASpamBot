@@ -1,0 +1,13 @@
+key_bomb
+key_ice
+key_snake
+key_fire
+key_thief
+key_finalboss
+key_obstacle
+key_grind
+key_space
+key_eye
+key_temple
+key_rescue
+key_arena1

@@ -1,0 +1,10 @@
+shotgun_10
+shotgun_lightning_10
+shotgun_water_10
+shotgun_fire_10
+shotgun_poison_10
+shotgun_ice_10
+shotgun_combat_10
+shotgun_backshot_10
+shotgun_doomsday_10
+shotgun_flat_10

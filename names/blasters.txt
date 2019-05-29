@@ -1,0 +1,10 @@
+triple_10
+triple_lightning_10
+triple_water_10
+triple_fire_10
+triple_poison_10
+triple_ice_10
+triple_trident_10
+triple_charge_10
+triple_classic_10
+triple_terror_10

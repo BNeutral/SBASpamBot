@@ -1,0 +1,9 @@
+armor_10
+armor_ghost
+armor_turtle
+armor_eagle
+armor_tourist
+armor_lightning_10
+armor_water_10
+armor_fire_10
+armor_poison_10

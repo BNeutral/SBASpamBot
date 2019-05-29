@@ -1,0 +1,10 @@
+poison_10
+heal_10
+damage_10
+shield_blast_10
+damageboost_blast_10
+poison_blast_10
+resist_aura_10
+vortex_10
+mine_10
+stunner_10

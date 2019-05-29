@@ -1,0 +1,10 @@
+strike_10
+strike_lightning_10
+strike_water_10
+strike_fire_10
+strike_poison_10
+strike_ice_10
+strike_tesla_10
+strike_mist_10
+strike_viper_10
+strike_raijin_10

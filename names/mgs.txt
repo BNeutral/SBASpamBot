@@ -1,0 +1,11 @@
+machinegun_10
+machinegun_lightning_10
+machinegun_water_10
+machinegun_fire_10
+machinegun_poison_10
+machinegun_ice_10
+machinegun_apache
+machinegun_wide_10
+machinegun_kraken_10
+machinegun_blizzard_10
+machinegun_gattling_10

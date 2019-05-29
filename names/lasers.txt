@@ -1,0 +1,10 @@
+laser_10
+laser_lightning_10
+laser_water_10
+laser_fire_10
+laser_poison_10
+laser_rear
+laser_blackhole
+laser_moon_10
+hadouken_10
+laser_snake_10

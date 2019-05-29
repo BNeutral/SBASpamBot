@@ -1,0 +1,12 @@
+wasp_10
+wasp_lightning_10
+wasp_water_10
+wasp_fire_10
+wasp_poison_10
+wasp_ice_10
+wasp_double_10
+wasp_space_10
+wasp_beam_10
+wasp_zem_10
+wasp_phoenix_10
+wasp_kaiju_10

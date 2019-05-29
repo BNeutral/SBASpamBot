@@ -1,0 +1,10 @@
+sword_10
+sword_lightning_10
+sword_water_10
+sword_fire_10
+sword_poison_10
+sword_ice_10
+sword_double_10
+sword_plasmashiv_10
+sword_smoke_10
+sword_beam_10
