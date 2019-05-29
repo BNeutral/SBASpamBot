@@ -77,6 +77,13 @@ void addChar(vector<INPUT> &vec, char ch) {
     vec.push_back(input);
 }
 
+//Hack so switching focus doesn't interfer with life with 500 key inputs
+void waitForFocus(HWND handle) {
+    while(handle != GetForegroundWindow()) { 
+        Sleep(1000);
+    }
+}
+
 /**
  * Sends enter->string->enter to whatever is on focus
  * Has some small sleeps because the game has some timing issues
@@ -91,17 +98,14 @@ void sendInputsToGame(const string &line, HWND handle, bool useItem)
         addChar(vec, ch);
     }
     addEnter(vec);
-    while(handle!=GetForegroundWindow()) { //Hack so switching focus doesn't kill you with 500 key inputs
-        Sleep(1000);
-    }
+    waitForFocus(handle);
     sendKey(VK_RETURN);
     Sleep(100); // Seems to get stuck without this
-    while(handle!=GetForegroundWindow()) { //Hack so switching focus doesn't kill you with 500 key inputs
-        Sleep(1000);
-    }
+    waitForFocus(handle);
     SendInput(vec.size(), vec.data(), sizeof(INPUT));
     Sleep(900); // Seems to get stuck without this
     if (useItem) {
+        waitForFocus(handle);
         sendKey(USE_SLOT);
         Sleep(100); // Seems to get stuck without this
     }
@@ -163,7 +167,7 @@ void menuLoop(vector<string> &files) {
             cout << i++ << ". " << file << endl;
         }
         cin >> select;
-        if (select <= files.size()) {
+        if (select > 0 && select <= files.size()) {
             int loops = 1;
             bool use = false;
             string &file = files[select-1];
@@ -181,6 +185,7 @@ int main(int argc, char** argv) {
     cout << "Note that when using upgrades you need your first cargo slot empty!" << endl;
     cout << "Default cmd program break on Windows is ctrl+pause." << endl;
     menuLoop(files);
+    return 0;
 }
 
 
