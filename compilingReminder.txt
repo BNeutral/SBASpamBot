@@ -1,0 +1,4 @@
+Open visual studio command prompt
+/Zi for debug symbols
+/EHsc for error handling
+cl /EHsc /Zi main.exe

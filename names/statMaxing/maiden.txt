@@ -1,0 +1,16 @@
+upgrade_armor|50
+upgrade_damage|40
+upgrade_maxsteam|10
+upgrade_repair|50
+upgrade_steam|50
+upgrade_speed|25
+upgrade_fireattack|12
+upgrade_iceattack|12
+upgrade_poisonattack|12
+upgrade_waterattack|12
+upgrade_lightningattack|12
+upgrade_firedefense|12
+upgrade_icedefense|12
+upgrade_poisondefense|12
+upgrade_waterdefense|12
+upgrade_lightningdefense|12

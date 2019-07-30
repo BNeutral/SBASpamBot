@@ -1,6 +1,0 @@
-upgrade_damage
-upgrade_speed
-upgrade_armor
-upgrade_steam
-upgrade_repair
-upgrade_maxsteam

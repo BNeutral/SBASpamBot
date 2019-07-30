@@ -22,8 +22,6 @@ const char* PROC_TITLE = "Steambirds Alliance";
 const string NAMES_PATH("./names");
 const string ELEM_UPGRADE("elemUpgrades");
 const string OTHER_UPGRADE("otherUpgrades");
-const int ELEM_REPEATS = 12;
-const int OTHER_REPEATS = 55;
 const char* PREPEND = "/give ";
 const char USE_SLOT = 0x31; //1
 
@@ -114,9 +112,9 @@ void sendInputsToGame(const string &line, HWND handle, bool useItem)
 /**
  * Returns any files in the names directory
  **/
-vector<string> fetchFiles() {
+vector<string> fetchFiles(const string &dir) {
     vector<string> names;
-    for (const auto & entry : experimental::filesystem::directory_iterator(NAMES_PATH))
+    for (const auto & entry : experimental::filesystem::directory_iterator(dir))
         names.push_back(entry.path().string());
     return names;
 }
@@ -124,7 +122,7 @@ vector<string> fetchFiles() {
 /**
  * Returns a text file as a vector of strings
  **/
-vector<string> readLines(string filePath) {
+vector<string> readLines(const string &filePath) {
     ifstream file(filePath.c_str());
     vector<string> result;
 	if(!file)
@@ -138,16 +136,24 @@ vector<string> readLines(string filePath) {
 }
 
 /**
- * Inputs each line of the file to the game
+ * Inputs each line of the file to the game, splits them up to check for loop amounts
  **/
-void inputFromFile(string filePath, int repeats, bool useItem) {
+void inputFromFile(string filePath) {
     vector<string> lines = readLines(filePath);
     HWND handle = FindWindowA(NULL, PROC_TITLE);
     if (handle) {
         SetForegroundWindow(handle);
         for(auto &line : lines){
-            for (int i = 0; i < repeats; ++i)
-                sendInputsToGame(line, handle, useItem);
+            int loops = 1;
+            bool useItem = false;
+            size_t matchPos = line.find("|");
+            if (matchPos != string::npos) {
+                loops = std::stoi(line.substr(matchPos+1));
+                line.erase(matchPos);    
+                useItem = true;                
+            }
+            for (int i = 0; i < loops; ++i)
+                sendInputsToGame(line, handle, loops>1);
         }
     }
     else {
@@ -158,33 +164,44 @@ void inputFromFile(string filePath, int repeats, bool useItem) {
 /**
  * User interface
  **/
-void menuLoop(vector<string> &files) {
+void menuLoop() {
     int select = 0;
+    bool dontExit = false;
+    string currentDir = NAMES_PATH;
+    vector<string> previousDirs = vector<string>();
+    vector<string> files = fetchFiles(currentDir);
     do {
+        dontExit = false;
         int i = 1;
-        cout << "0. Exit" << endl;
+        cout << "0. Back" << endl;
         for(auto file : files) {
             cout << i++ << ". " << file << endl;
         }
         cin >> select;
         if (select > 0 && select <= files.size()) {
-            int loops = 1;
-            bool use = false;
-            string &file = files[select-1];
-            if (file.find(ELEM_UPGRADE) != string::npos)
-                loops = ELEM_REPEATS, use = true;
-            else if (file.find(OTHER_UPGRADE) != string::npos)
-                loops = OTHER_REPEATS, use = true;
-            inputFromFile(file, loops, use);
+            string &filePath = files[select-1];
+            if (experimental::filesystem::is_directory(filePath)) {
+                previousDirs.push_back(currentDir);
+                currentDir = filePath;
+                files = fetchFiles(filePath);
+            }
+            else {
+                inputFromFile(filePath);
+            }
         }            
-    } while (select != 0);
+        else if (select == 0 && previousDirs.size() > 0) {
+            currentDir = previousDirs.back();
+            files = fetchFiles(previousDirs.back());
+            previousDirs.pop_back();
+            dontExit = true;
+        }
+    } while (select != 0 || dontExit );
 }
 
 int main(int argc, char** argv) {
-    vector<string> files = fetchFiles();
     cout << "Note that when using upgrades you need your first cargo slot empty!" << endl;
     cout << "Default cmd program break on Windows is ctrl+pause." << endl;
-    menuLoop(files);
+    menuLoop();
     return 0;
 }
 
